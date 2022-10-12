@@ -22,6 +22,7 @@ function getMoviesFromDirector(movies, director) {
 // Exercise 3: Calculate the average of the films of a given director.
   //iteramos sobre array con forEach, si se cumple condic. guardamos scores en nueva variable.
   //con reduce() sumamos las scores del array
+  //toFiXed(2) limita a 2 los decimales pero convierte el resultado en string, por eso hay usar parseFloat() para que vuelva a ser number
 function moviesAverageOfDirector(movies, director) {
   let averageOfDirector = 0;
   let scoreDirector = [];
@@ -31,14 +32,24 @@ function moviesAverageOfDirector(movies, director) {
     }
   });
   let sumaScore = scoreDirector.reduce((a,b)=> a+b);
-  averageOfDirector = sumaScore / scoreDirector.length;
+  averageOfDirector = (sumaScore / scoreDirector.length).toFixed(2);
   console.log("Exercice 3 ->",averageOfDirector);
-  return averageOfDirector;
+  return parseFloat(averageOfDirector);
 }
 
 // Exercise 4:  Alphabetic order by title 
-function orderAlphabetically(array) {
-  
+  //mapeamos array movies para que solo contenga títulos y aplicamos sort() para ordenar alfabeticamente. Reducimos longitud array con el metodo slice() para que si cumple condic. muestre solo 20 primeros resultados.
+function orderAlphabetically(movies) {
+  let orderAlphabetic = movies.map(movie => movie.title);
+  orderAlphabetic.sort();
+  console.log("EXERCISE 4 -> ", orderAlphabetic);
+  if(orderAlphabetic.length > 20){
+    let top20Movies =orderAlphabetic.slice(0,20);
+    console.log("Top20 ->", top20Movies);
+    return top20Movies;
+  }else{
+    return orderAlphabetic;
+  }
 }
 
 // Exercise 5: Order by year, ascending
