@@ -6,7 +6,7 @@ function getAllDirectors(movies) {
   let result= [];
   result = movies.map(movie => movie.director);
   
-  console.log("EXERCICE 1 ->", result);
+  //console.log("EXERCICE 1 ->", result);
   return result;
 }
 
@@ -15,7 +15,7 @@ function getAllDirectors(movies) {
   //usamos filter para crear nuevo array con las movies que cumplan condicion
 function getMoviesFromDirector(movies, director) {
  let moviesFromDirector = movies.filter(movie => movie.director === director);
- console.log("Exercice 2 ->", moviesFromDirector);
+ //console.log("Exercice 2 ->", moviesFromDirector);
  return moviesFromDirector;
 }
 
@@ -33,7 +33,7 @@ function moviesAverageOfDirector(movies, director) {
   });
   let sumaScore = scoreDirector.reduce((a,b)=> a+b);
   averageOfDirector = (sumaScore / scoreDirector.length).toFixed(2);
-  console.log("Exercice 3 ->",averageOfDirector);
+  //console.log("Exercice 3 ->",averageOfDirector);
   return parseFloat(averageOfDirector);
 }
 
@@ -42,10 +42,10 @@ function moviesAverageOfDirector(movies, director) {
 function orderAlphabetically(movies) {
   let orderAlphabetic = movies.map(movie => movie.title);
   orderAlphabetic.sort();
-  console.log("EXERCISE 4 -> ", orderAlphabetic);
+  //console.log("EXERCISE 4 -> ", orderAlphabetic);
   if(orderAlphabetic.length > 20){
     let top20Movies =orderAlphabetic.slice(0,20);
-    console.log("Top20 ->", top20Movies);
+    //console.log("Top20 ->", top20Movies);
     return top20Movies;
   }else{
     return orderAlphabetic;
@@ -53,8 +53,27 @@ function orderAlphabetically(movies) {
 }
 
 // Exercise 5: Order by year, ascending
-function orderByYear() {
-
+function orderByYear(movies) {
+  let moviesOrderYear = movies.map(movie => movie);
+  //metodo sort() para ordenar. Recibe función callback de comparacion, que se  
+  //ejecuta con todos los elementos del array. Función -> 2 parámetros, que 
+  //toman los valores de los elementos que se estan comparando. 
+  moviesOrderYear.sort((movie1 , movie2) =>{
+    if(movie1.year < movie2.year){
+      return -1;  //movie1 debe ir primero (orden ascendente)
+    }else if(movie1.year > movie2.year){
+      return 1;   //movie1 debe ir despues
+    }else{
+      //si no cumple ninguna de las condic.anteriores es que movie.year son iguales. Entonces pasamos a comparar movie.title para ordenar alfabeticamente
+      if(movie1.title < movie2.title){
+        return -1; 
+      }else if(movie1.title > movie2.title){
+        return 1;
+      }
+    }
+  })
+  //console.log("EXERCISE 5 ->", moviesOrderYear);
+  return moviesOrderYear;
 }
 
 // Exercise 6: Calculate the average of the movies in a category
