@@ -93,8 +93,30 @@ function moviesAverageByCategory(movies, genre) {
   return parseFloat(averageByCategory);
 }
 // Exercise 7: Modify the duration of movies to minutes
-function hoursToMinutes() {
-
+  //iteramos sobre array movies y en cada elemento manipulamos movie.duration y creamos variables para hours, minutes, movieDuration y timeToMinutes.
+function hoursToMinutes(movies) {
+let moviesToMinutes = movies.map(movie => {
+  let timeToMinutes = 0;
+  let movieDuration = movie.duration.replace(/ /g, "");
+  if(movie.duration.includes("h") && movie.duration.includes("min")){
+    let hours = parseFloat(movieDuration.slice(0, movieDuration.indexOf("h")));
+    let minutes = parseFloat(movieDuration.slice(movieDuration.indexOf("h")+1,movieDuration.indexOf("m")));
+    timeToMinutes = (hours * 60)+ minutes;
+  }else if(!movie.duration.includes("min")){
+    hours = movieDuration.slice(0, movieDuration.indexOf("h"));
+    timeToMinutes = parseFloat(hours * 60);
+  }else{
+    minutes = movieDuration.slice(0, movieDuration.indexOf("m"));
+    timeToMinutes = parseFloat(minutes);
+  }
+    //este es el resultado de cada iteracion. Return --> copia item movie (con spread operator) y establecemos duration en el resultado de timeToMinutes
+    return {
+      ...movie,
+      duration : timeToMinutes
+    }
+}
+);
+return moviesToMinutes;
 }
 
 // Exercise 8: Get the best film of a year
