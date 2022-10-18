@@ -120,9 +120,15 @@ return moviesToMinutes;
 }
 
 // Exercise 8: Get the best film of a year
-function bestFilmOfYear() {
-  
-}
+function bestFilmOfYear(movies, year) {
+    let moviesByYear = movies.filter(movie => movie.year === year);
+    //ordenamos score.movie en orden descendente. films[0] será bestFilm
+    let films = moviesByYear.sort((movie1, movie2)=> movie2.score - movie1.score )
+    //el metodo Array.of() crea nuevo array
+    let bestFilm = Array.of(films[0])
+    return bestFilm;
+  }
+
 
 
 
